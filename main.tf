@@ -1,3 +1,14 @@
+# Cloud
+terraform {
+  cloud {
+    organization = "tr-org"
+    hostname     = "app.terraform.io"
+    workspaces {
+      name = "tr-org-work"
+    }
+  }
+}
+
 # AWS
 module "aws" {
   source     = "./aws"
