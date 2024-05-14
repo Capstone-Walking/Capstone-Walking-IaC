@@ -28,16 +28,36 @@ resource "aws_ecs_task_definition" "ecs_task" {
         "name" : "${var.prefix}-container",
         "image" : "nginx:latest",
         "cpu" : 0,
-        "memory" : 768,
-        "memoryReservation" : 512,
+        "memory" : 512,
+        "memoryReservation" : 256,
         "essential" : true,
         "portMappings" : [
           {
             "containerPort" : 80,
-            "hostPort" : 80,
+            "hostPort" : 0,
             "protocol" : "tcp"
           }
         ],
+        "mountPoints" : [],
+        "volumesFrom" : [],
+        "secrets" : [
+          {
+            "name" : "SECURE_STRING",
+            "valueFrom" : "${aws_ssm_parameter.secure_string.name}"
+          },
+          {
+            "name" : "STRING",
+            "valueFrom" : "${aws_ssm_parameter.string.name}"
+          }
+        ],
+        "logConfiguration" : {
+          "logDriver" : "awslogs",
+          "options" : {
+            "awslogs-group" : "${aws_cloudwatch_log_group.cloudwatch_log_group.name}",
+            "awslogs-region" : "${var.region}",
+            "awslogs-stream-prefix" : "ecs"
+          }
+        }
       }
     ]
   )
