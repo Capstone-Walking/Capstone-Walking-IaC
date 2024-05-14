@@ -40,3 +40,45 @@ variable "lc_image_id" {
   default     = "ami-04607756254222deb"
   description = "The ID of the AMI to use for the launch configuration"
 }
+
+variable "rds_db_name" {
+  type        = string
+  default     = "mydb"
+  description = "The name of the database to create in the RDS instance"
+}
+
+variable "rds_username" {
+  type        = string
+  default     = "root"
+  description = "The username for the RDS instance"
+}
+
+variable "rds_password" {
+  type        = string
+  default     = "thisisrdspassword"
+  description = "The password for the RDS instance"
+}
+
+variable "rds_instance_class" {
+  type        = string
+  default     = "db.t3.micro"
+  description = "The instance class for the RDS instance"
+}
+
+variable "rds_engine" {
+  type        = string
+  default     = "MySQL"
+  description = "The engine for the RDS instance"
+}
+
+variable "rds_engine_version" {
+  type        = string
+  default     = "8.0.35"
+  description = "The engine version for the RDS instance"
+}
+
+variable "rds_allocated_storage" {
+  type        = number
+  default     = 20
+  description = "The allocated storage for the RDS instance"
+}
