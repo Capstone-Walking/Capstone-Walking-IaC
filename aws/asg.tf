@@ -6,6 +6,7 @@ resource "aws_launch_configuration" "lc" {
   iam_instance_profile        = aws_iam_instance_profile.ecs_instance_profile.name
   security_groups             = [aws_security_group.application_sg.id]
   associate_public_ip_address = true
+  key_name                    = aws_key_pair.kp.key_name
   root_block_device {
     volume_size = 30
     volume_type = "gp2"
