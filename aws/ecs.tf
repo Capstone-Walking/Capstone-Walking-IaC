@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     [
       {
         "name" : "${var.prefix}-container",
-        "image" : "nginx:latest",
+        "image" : "${aws_ecr_repository.ecr.repository_url}:latest",
         "cpu" : 0,
         "memory" : 512,
         "memoryReservation" : 256,
