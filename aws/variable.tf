@@ -82,3 +82,21 @@ variable "rds_allocated_storage" {
   default     = 20
   description = "The allocated storage for the RDS instance"
 }
+
+variable "kakao_admin_key" {
+  type        = string
+  default     = "kakao_admin_key"
+  description = "Kakao admin key"
+}
+
+variable "kako_app_redirect_uri" {
+  type        = string
+  default     = "kako_app_redirect_uri"
+  description = "Kakao app redirect uri"
+}
+
+variable "kakao_app_client_id" {
+  type        = string
+  default     = "kakao_web_client_id"
+  description = "Kakao web client id"
+}
