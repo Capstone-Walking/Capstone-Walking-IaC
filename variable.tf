@@ -1,3 +1,9 @@
+variable "domain_name" {
+  type        = string
+  default     = "walkingtu.store"
+  description = "The domain name for the Route 53 hosted zone"
+}
+
 variable "aws_access_key" {
   type        = string
   sensitive   = true

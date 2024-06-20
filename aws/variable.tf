@@ -5,6 +5,12 @@ variable "prefix" {
 }
 
 // set at root
+variable "domain_name" {
+  type        = string
+  description = "The domain name for the Route 53 hosted zone"
+}
+
+// set at root
 variable "access_key" {
   type        = string
   sensitive   = true
