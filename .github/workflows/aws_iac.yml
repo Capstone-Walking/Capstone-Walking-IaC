@@ -37,4 +37,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var=aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }} -var=aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} -var=kakao_admin_key=${{ secrets.KAKAO_ADMIN_KEY }} -var=kako_app_redirect_uri=${{ secrets.KAKAO_APP_REDIRECT_URI }} -var=kakao_app_client_id=${{ secrets.KAKAO_APP_CLIENT_ID }} --input=false
+        run: terraform apply -auto-approve -var=aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }} -var=aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} -var=kakao_admin_key=${{ secrets.KAKAO_ADMIN_KEY }} -var=kako_app_redirect_uri=${{ secrets.KAKAO_APP_REDIRECT_URI }} -var=kakao_app_client_id=${{ secrets.KAKAO_APP_CLIENT_ID }} -var=seoul_api_key=${{ secrets.SEOUL_API_KEY }} -var=fe_origin=https://capstonewalking.netlify.app --input=false
