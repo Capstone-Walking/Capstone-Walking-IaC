@@ -54,3 +54,9 @@ variable "fe_origin" {
   default     = "fe_origin"
   description = "Frontend origin"
 }
+
+variable "seoul_api_key" {
+  type        = string
+  default     = "seoul_api_key"
+  description = "Seoul API key"
+}

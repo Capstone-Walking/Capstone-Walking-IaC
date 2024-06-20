@@ -148,7 +148,7 @@ variable "refresh_token_validtime" {
   description = "The time in minutes that a refresh token is valid for"
 }
 
-// todo fill
+// set at root
 variable "seoul_api_key" {
   type        = string
   default     = "seoul_api_key"

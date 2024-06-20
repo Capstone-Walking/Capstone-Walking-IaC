@@ -21,4 +21,5 @@ module "aws" {
   kakao_app_client_id   = var.kakao_app_client_id
   fe_origin             = var.fe_origin
   domain_name           = var.domain_name
+  seoul_api_key         = var.seoul_api_key
 }
