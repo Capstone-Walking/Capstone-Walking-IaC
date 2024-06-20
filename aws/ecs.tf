@@ -46,6 +46,14 @@ resource "aws_ecs_task_definition" "ecs_task" {
             "valueFrom" : "${aws_ssm_parameter.token_secret_key.name}"
           },
           {
+            "name" : "ACCESS_TOKEN_VALIDTIME"
+            "valueFrom" : "${aws_ssm_parameter.access_token_validtime.name}"
+          },
+          {
+            "name" : "REFRESH_TOKEN_VALIDTIME",
+            "valueFrom" : "${aws_ssm_parameter.refresh_token_validtime.name}"
+          },
+          {
             "name" : "CORS_PATH_PATTERNS",
             "valueFrom" : "${aws_ssm_parameter.cors_path_patterns.name}"
           },
@@ -72,18 +80,6 @@ resource "aws_ecs_task_definition" "ecs_task" {
           {
             "name" : "CORS_MAX_AGE",
             "valueFrom" : "${aws_ssm_parameter.cors_max_age.name}"
-          },
-          {
-            "name" : "COOKIE_DOMAIN",
-            "valueFrom" : "${aws_ssm_parameter.cookie_domain.name}"
-          },
-          {
-            "name" : "COOKIE_PATH",
-            "valueFrom" : "${aws_ssm_parameter.cookie_path.name}"
-          },
-          {
-            "name" : "COOKIE_MAX_AGE",
-            "valueFrom" : "${aws_ssm_parameter.cookie_max_age.name}"
           },
           {
             "name" : "DB_HOSTNAME",
@@ -157,6 +153,26 @@ resource "aws_ecs_task_definition" "ecs_task" {
             "name" : "KAKO_APP_CLIENT_ID",
             "valueFrom" : "${aws_ssm_parameter.kako_app_client_id.name}"
           },
+          {
+            "name" : "WALKING_DEFAULT_PROFILES",
+            "valueFrom" : "${aws_ssm_parameter.walking_default_profiles.name}"
+          },
+          {
+            "name" : "SCHEDULER_INTERVAL",
+            "valueFrom" : "${aws_ssm_parameter.schedular_interval.name}"
+          },
+          {
+            "name" : "DATA_INTERVAL",
+            "valueFrom" : "${aws_ssm_parameter.data_interval.name}"
+          },
+          {
+            "name" : "MAXIMUM_SEARCH_COUNT",
+            "valueFrom" : "${aws_ssm_parameter.maximum_search_count.name}"
+          },
+          {
+            "name" : "SEOUL_API_KEY",
+            "valueFrom" : "${aws_ssm_parameter.seoul_api_key.name}"
+          }
         ],
         "logConfiguration" : {
           "logDriver" : "awslogs",
@@ -200,7 +216,7 @@ resource "aws_alb_target_group" "alb_target_group" {
 }
 
 # ALB Listener
-resource "aws_alb_listener" "alb_listener" {
+resource "aws_alb_listener" "http_alb_listener" {
   load_balancer_arn = aws_alb.alb.arn
   port              = 80
   protocol          = "HTTP"
@@ -209,6 +225,25 @@ resource "aws_alb_listener" "alb_listener" {
     type             = "forward"
     target_group_arn = aws_alb_target_group.alb_target_group.arn
   }
+}
+
+// todo: add https listener
+resource "aws_alb_listener" "https_alb_listenser" {
+  load_balancer_arn = aws_alb.alb.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate.cert.arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.alb_target_group.arn
+  }
+}
+
+resource "aws_lb_listener_certificate" "https_listener_cert" {
+  listener_arn    = aws_alb_listener.https_alb_listenser.arn
+  certificate_arn = aws_acm_certificate.cert.arn
 }
 
 # ECS Service

@@ -4,7 +4,23 @@ resource "aws_ssm_parameter" "token_secret_key" {
   name        = "/tokenSecretKey"
   description = "token secret key"
   type        = "SecureString"
-  value       = "jwtsecretKeyhastolonghowlongidontknow" // todo fix
+  value       = "jwtsecretKeyhastolonghowlongidontknow"
+}
+
+## ACCESS_TOKEN_VALIDTIME
+resource "aws_ssm_parameter" "access_token_validtime" {
+  name        = "/access-token/validtime"
+  description = "Access token validtime"
+  type        = "SecureString"
+  value       = var.access_token_validtime
+}
+
+## REFRESH_TOKEN_VALIDTIME
+resource "aws_ssm_parameter" "refresh_token_validtime" {
+  name        = "/refresh-token/validtime"
+  description = "Refresh token validtime"
+  type        = "SecureString"
+  value       = var.refresh_token_validtime
 }
 
 ## CORS_PATH_PATTERNS
@@ -20,7 +36,7 @@ resource "aws_ssm_parameter" "cors_origin_patterns" {
   name        = "/cors/origin-patterns"
   description = "CORS origin patterns"
   type        = "SecureString"
-  value       = "http://localhost:3000" // todo fix
+  value       = var.fe_origin
 }
 
 ## CORS_ALLOWED_METHODS
@@ -61,30 +77,6 @@ resource "aws_ssm_parameter" "cors_max_age" {
   description = "CORS max age"
   type        = "SecureString"
   value       = "1800"
-}
-
-## COOKIE_DOMAIN
-resource "aws_ssm_parameter" "cookie_domain" {
-  name        = "/cookie/domain"
-  description = "Cookie domain"
-  type        = "SecureString"
-  value       = "localhost" // todo fix
-}
-
-## COOKIE_PATH
-resource "aws_ssm_parameter" "cookie_path" {
-  name        = "/cookie/path"
-  description = "Cookie path"
-  type        = "SecureString"
-  value       = "/" // todo fix
-}
-
-## COOKIE_MAX_AGE
-resource "aws_ssm_parameter" "cookie_max_age" {
-  name        = "/cookie/max-age"
-  description = "Cookie max age"
-  type        = "SecureString"
-  value       = "86400" // todo
 }
 
 ## DB_HOSTNAME
@@ -229,4 +221,44 @@ resource "aws_ssm_parameter" "kako_app_client_id" {
   description = "Kako app client ID"
   type        = "SecureString"
   value       = var.kakao_app_client_id
+}
+
+## WALKING_DEFAULT_PROFILES
+resource "aws_ssm_parameter" "walking_default_profiles" {
+  name        = "/walking/default-profiles"
+  description = "Walking default profiles"
+  type        = "SecureString"
+  value       = "https://${aws_cloudfront_distribution.s3_distribution.domain_name}/default/profiles/red.png, https://${aws_cloudfront_distribution.s3_distribution.domain_name}/default/profiles/yellow.png, https://${aws_cloudfront_distribution.s3_distribution.domain_name}/default/profiles/green.png"
+}
+
+## SCHEDULAR_INTERVAL
+resource "aws_ssm_parameter" "schedular_interval" {
+  name        = "/schedular/interval"
+  description = "Schedular interval"
+  type        = "SecureString"
+  value       = var.schedular_interval
+}
+
+## DATA_INTERVAL
+resource "aws_ssm_parameter" "data_interval" {
+  name        = "/data/interval"
+  description = "Data interval"
+  type        = "SecureString"
+  value       = var.data_interval
+}
+
+## MAXIMUM_SEARCH_COUNT
+resource "aws_ssm_parameter" "maximum_search_count" {
+  name        = "/maximum/search-count"
+  description = "Maximum search count"
+  type        = "SecureString"
+  value       = var.maximum_search_count
+}
+
+## SEOUL_API_KEY
+resource "aws_ssm_parameter" "seoul_api_key" {
+  name        = "/seoul/api-key"
+  description = "Seoul API key"
+  type        = "SecureString"
+  value       = var.seoul_api_key
 }
