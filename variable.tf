@@ -22,20 +22,29 @@ variable "aws_rds_password" {
   description = "The password for the RDS instance"
 }
 
+// todo fill
 variable "kakao_admin_key" {
   type        = string
   default     = "kakao_admin_key"
   description = "Kakao admin key"
 }
 
+// todo fill
 variable "kako_app_redirect_uri" {
   type        = string
   default     = "kako_app_redirect_uri"
   description = "Kakao app redirect uri"
 }
 
+// todo fill
 variable "kakao_app_client_id" {
   type        = string
   default     = "kakao_web_client_id"
   description = "Kakao web client id"
+}
+
+variable "fe_origin" {
+  type        = string
+  default     = "fe_origin"
+  description = "Frontend origin"
 }

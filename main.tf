@@ -19,4 +19,5 @@ module "aws" {
   kakao_admin_key       = var.kakao_admin_key
   kako_app_redirect_uri = var.kako_app_redirect_uri
   kakao_app_client_id   = var.kakao_app_client_id
+  fe_origin             = var.fe_origin
 }

@@ -4,12 +4,14 @@ variable "prefix" {
   description = "The prefix to use for all resources"
 }
 
+// set at root
 variable "access_key" {
   type        = string
   sensitive   = true
   description = "The access key for the IAM root user"
 }
 
+// set at root
 variable "secret_key" {
   type        = string
   sensitive   = true
@@ -27,7 +29,6 @@ variable "availability_zones" {
   default     = ["ap-northeast-2a", "ap-northeast-2c"]
   description = "The availability zones to use for the subnets"
 }
-
 
 variable "instance_type" {
   type        = string
@@ -83,20 +84,67 @@ variable "rds_allocated_storage" {
   description = "The allocated storage for the RDS instance"
 }
 
+// set at root
+variable "fe_origin" {
+  type        = string
+  default     = "fe_origin"
+  description = "Frontend origin"
+}
+
+// set at root
 variable "kakao_admin_key" {
   type        = string
   default     = "kakao_admin_key"
   description = "Kakao admin key"
 }
 
+// set at root
 variable "kako_app_redirect_uri" {
   type        = string
   default     = "kako_app_redirect_uri"
   description = "Kakao app redirect uri"
 }
 
+// set at root
 variable "kakao_app_client_id" {
   type        = string
   default     = "kakao_web_client_id"
   description = "Kakao web client id"
+}
+
+variable "schedular_interval" {
+  type        = number
+  default     = 70
+  description = "The interval in minutes to run the scheduler"
+}
+
+variable "data_interval" {
+  type        = number
+  default     = 20
+  description = "The interval in minutes to run the data collector"
+}
+
+variable "maximum_search_count" {
+  type        = number
+  default     = 5
+  description = "The maximum number of search results to return"
+}
+
+variable "access_token_validtime" {
+  type        = number
+  default     = 31557600000
+  description = "The time in minutes that an access token is valid for"
+}
+
+variable "refresh_token_validtime" {
+  type        = number
+  default     = 31557600000
+  description = "The time in minutes that a refresh token is valid for"
+}
+
+// todo fill
+variable "seoul_api_key" {
+  type        = string
+  default     = "seoul_api_key"
+  description = "Seoul API key"
 }
